@@ -36,4 +36,4 @@ typedef CardSwiperOnUndo = bool Function(
   CardSwiperDirection direction,
 );
 
-typedef CardSwiperOnTap = FutureOr<void> Function();
+typedef CardSwiperOnTap = FutureOr<void> Function(int currentIndex);

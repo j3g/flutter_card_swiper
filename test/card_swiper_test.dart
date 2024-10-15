@@ -637,24 +637,25 @@ void main() {
 
     testWidgets('when tapping a card, expect callback', (WidgetTester tester) async {
       final swiperKey = GlobalKey();
-      var isCalled = false;
+      var index = -1;
 
       await tester.pumpApp(
         CardSwiper(
           key: swiperKey,
           cardsCount: 3,
           numberOfCardsDisplayed: 1,
-          onTap: () {
-            isCalled = true;
+          initialIndex: 2,
+          onTap: (currentIndex) {
+            index = currentIndex;
           },
           cardBuilder: genericBuilder,
         ),
       );
 
-      await tester.dragDown(swiperKey);
+      await tester.tap(find.byKey(swiperKey));
       await tester.pumpAndSettle();
 
-      expect(isCalled, true);
+      expect(index, 2);
     });
 
   });
