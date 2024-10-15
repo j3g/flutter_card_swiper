@@ -634,5 +634,28 @@ void main() {
 
       expect(find.card(0), findsOneWidget);
     });
+
+    testWidgets('when tapping a card, expect callback', (WidgetTester tester) async {
+      final swiperKey = GlobalKey();
+      var isCalled = false;
+
+      await tester.pumpApp(
+        CardSwiper(
+          key: swiperKey,
+          cardsCount: 3,
+          numberOfCardsDisplayed: 1,
+          onTap: () {
+            isCalled = true;
+          },
+          cardBuilder: genericBuilder,
+        ),
+      );
+
+      await tester.dragDown(swiperKey);
+      await tester.pumpAndSettle();
+
+      expect(isCalled, true);
+    });
+
   });
 }
